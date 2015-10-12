@@ -1,0 +1,25 @@
+ <?php
+ $title = 'Créer une nouvelle campagne';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <p><?php if(isset($messages)){echo $messages;} ?></p>
+ <p><?php if(isset($id)){echo $id;} ?></p>
+	<?php
+	 $form->setAttribute('action', $this->url('workflow', array('action' => 'new')));
+	 $form->prepare();
+
+	 echo $this->form()->openTag($form);
+	 echo $this->formHidden($form->get('id'));
+	 echo $this->formHidden($form->get('selligent_mailid'));
+	 echo $this->formRow($form->get('name'));
+	 echo $this->formRow($form->get('type_campagne'));
+	 echo $this->formRow($form->get('assigned_users'));
+	 echo $this->formSubmit($form->get('submit'));
+	 echo $this->form()->closeTag();
+	 
+	 echo $this->formElementErrors($form->get('id'));
+	 echo $this->formElementErrors($form->get('name'));
+	 echo $this->formElementErrors($form->get('type_campagne'));
+	 echo $this->formElementErrors($form->get('assigned_users'));
+	 

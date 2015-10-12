@@ -1,0 +1,111 @@
+<?php
+if ($role=='admin'){
+	$title = $this->escapeHtml($mother_campaign->name);
+}else{
+	$title = $this->escapeHtml($campaign->name);
+}
+	$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p><?php if(isset($messages)){echo $messages;} ?></p>
+
+<?php /***************************************************************************
+       ********************************** ADMIN **********************************
+       ***************************************************************************/ ?>
+<?php if($role=='admin') : ?>
+	<div>
+	 <table class="table">
+	 <tr>
+		 <th>CEP</th>
+		 <th>Distributeur</th>		 
+		 <th>Etape</th>
+	 </tr>
+	 <?php $i = 1; ?>
+	 <?php foreach ($campaigns as $campagne) : ?>
+			<?php $nbchild = $campagne->children->count();
+				  if($nbchild>0) : ?>
+				<?php $j = 1; ?>
+				<?php foreach ($campagne->children as $child) : ?>
+					<tr>
+						<?php if($j ==1){echo '<td rowspan="'.$nbchild.'">'.$this->escapeHtml($campagne->assigned_users).'</td>';}?>
+						<td><?php echo $this->escapeHtml($child->assigned_users);?></td>
+						<td><progress value="<?php echo $this->escapeHtml($child->step);?>" max="7"></progress></td>
+					</tr>
+				<?php $j++; ?>					
+				<?php endforeach; ?>
+			<?php else : ?> 
+				<tr>
+					<td colspan="2"><?php echo $this->escapeHtml($campagne->assigned_users);?></td>
+					<td><progress value="<?php echo $this->escapeHtml($campagne->step);?>" max="7"></progress></td>
+				</tr>
+			<?php endif; ?> 
+	 <?php $i++; ?>
+	 <?php endforeach; ?>
+	 </table>
+	</div>
+<?php endif; ?>
+ 
+<?php /***************************************************************************
+       *********************************** CEP ***********************************
+       ***************************************************************************/ ?>
+<?php if($role=='cep') : ?>
+	<div>
+		<table class="table">
+			<tr>
+				<th></th>
+				<th>Etape</th>
+				<th>&nbsp;</th>
+			</tr>
+			<?php if(!empty($campaign->children)) : ?>		 
+				<?php foreach ($campaign->children as $child) : ?>
+					<tr>
+						<td><?php echo $this->escapeHtml($child->assigned_users);?></td>
+						<td><progress value="<?php echo $this->escapeHtml($child->step);?>" max="7"></progress></td>
+						<?php if(empty($child->children)){echo '<td><a href="'.$this->url('workflow', array('action'=>'campagne', 'id'=>$child->id)).'">détails</a></td>';}?>
+					</tr>
+				<?php endforeach; ?>
+			<?php else : ?> 
+				<tr>
+					<td><?php echo $this->escapeHtml($campaign->assigned_users);?></td>
+					<td><progress value="<?php echo $this->escapeHtml($campaign->step);?>" max="7"></progress></td>
+					<td><a href=<?php echo $this->url('workflow', array('action'=>'campagne', 'id'=>$campaign->id));?>">détails</a></td>
+				</tr>
+			<?php endif; ?> 
+
+		</table>
+	</div>
+<?php endif; ?> 
+ 
+<?php if(!empty($form)) : ?>
+	<div>
+	<?php
+	 $form->setAttribute('action', $this->url('workflow', array('action' => 'campagne', 'id' => $campaign->id)));
+	 $form->prepare(); 
+	echo $this->form()->openTag($form);	 
+
+	/*******************************************************************************************/	
+	/************************************** CAMPAGNE FORM **************************************/
+	if($form->getAttribute('name') == 'campagnes'){
+		echo $this->formHidden($form->get('id'));
+		echo $this->formHidden($form->get('selligent_mailid'));
+		echo $this->formRow($form->get('name'));
+		echo $this->formRow($form->get('type_campagne'));
+		echo $this->formRow($form->get('assigned_users'));
+
+	/*******************************************************************************************/
+	/************************************** ENVOIBAT FORM **************************************/ 
+	}elseif($form->getAttribute('name') == 'envoiBAT'){		
+		echo $this->formHidden($form->get('id'));
+		echo $this->formRow($form->get('envoiBAT'));
+	}
+	 echo $this->formSubmit($form->get('submit'));
+	 echo $this->form()->closeTag();
+
+?>	 
+	</div>
+<?php endif; ?>
+<?php /***************************************************************************
+       ****************************** DISTRIBUTEUR *******************************
+       ***************************************************************************/ ?>
+<?php if($role=='distributeur') : ?>
+<?php endif; ?> 

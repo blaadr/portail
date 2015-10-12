@@ -1,0 +1,75 @@
+body {
+    padding-top: 83px;
+	background-color: #f39500;
+}
+
+.zf-green {
+    color: #68b604;
+}
+
+.btn-success {
+  background-color: #57a900;
+  background-image: -moz-linear-gradient(top, #70d900, #57a900);
+  background-image: -ms-linear-gradient(top, #70d900, #57a900);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#70d900), to(#57a900));
+  background-image: -webkit-linear-gradient(top, #70d900, #57a900);
+  background-image: -o-linear-gradient(top, #70d900, #57a900);
+  background-image: linear-gradient(top, #70d900, #57a900);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#70d900', endColorstr='#57a900', GradientType=0);
+}
+
+.btn-success:hover,
+.btn-success:active,
+.btn-success.active,
+.btn-success.disabled,
+.btn-success[disabled] {
+  background-color: #57a900;
+}
+
+.btn-success:active, .btn-success.active {
+  background-color: #57a900;
+}
+
+div.container a.brand {
+    background: url("../img/basf_logo.png") no-repeat scroll 0 10px transparent;
+    margin-left: 0;
+    /*padding: 8px 20px 12px 40px;*/
+}
+
+.navbar-custom {
+	background-image: none;
+	background-color: #F39500;
+}
+
+.navbar-brand{
+	padding: 0px;
+}
+.navbar a{
+	color:	#fff;
+}
+.navbar-nav{
+	margin-top: 1em;
+}
+
+.nav > li > a:hover, .nav > li > a:focus{
+	background-color: #FACE8F;
+}
+
+#iframe{
+	border: 0px;
+	width: 100%;
+} 
+
+#main{
+	width: 100%;
+	padding: 0px;
+	background-color: #f39500;
+}
+
+progress{
+	width: 100%;
+}
+
+.table>tbody>tr>td{
+	vertical-align: middle;
+}

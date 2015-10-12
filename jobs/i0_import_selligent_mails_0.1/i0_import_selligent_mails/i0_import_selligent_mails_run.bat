@@ -1,0 +1,3 @@
+%~d0
+cd %~dp0
+java -Xms256M -Xmx1024M -cp .;../lib/routines.jar;../lib/log4j-1.2.16.jar;../lib/talendcsv.jar;../lib/talend_file_enhanced_20070724.jar;../lib/checkArchive.jar;../lib/dom4j-1.6.1.jar;../lib/jakarta-oro-2.0.8.jar;../lib/talendzip.jar;../lib/commons-compress-1.6.jar;../lib/zip4j_1.3.1.jar;../lib/mysql-connector-java-5.1.30-bin.jar;i0_import_selligent_mails_0_1.jar; basf.i0_import_selligent_mails_0_1.i0_import_selligent_mails --context=Default %* 

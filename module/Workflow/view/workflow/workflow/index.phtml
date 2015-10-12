@@ -1,0 +1,61 @@
+ <?php
+
+
+ $title = '';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <p><?php if(isset($messages)){echo $messages;} ?></p>
+ <?php if(isset($unattributedTemplates)) : ?>
+	<div>
+	 <h2>Liste des gabarits SIM non affectés en workflow</h2>
+	 <table class="table">
+	 <tr>
+		 <th>id</th>
+		 <th>nom du gabarit</th>
+		 <th>date de création</th>
+		 <th>date de modification</th>
+		 <th>template</th>
+		 <th>&nbsp;</th>
+	 </tr>
+	 
+	 <?php foreach ($unattributedTemplates as $unattributedTemplate) : ?>
+		 <tr>
+			 <td><?php echo $this->escapeHtml($unattributedTemplate->id);?></td>
+			 <td><?php echo $this->escapeHtml($unattributedTemplate->name);?></td>
+			 <td><?php echo $this->escapeHtml($unattributedTemplate->created_dt);?></td>
+			 <td><?php echo $this->escapeHtml($unattributedTemplate->modified_dt);?></td>
+			 <td><?php echo $this->escapeHtml($unattributedTemplate->template);?></td>
+			 <td><a href="workflow/new/<?php echo $this->escapeHtml($unattributedTemplate->id);?>">Créer la campagne</a></td>
+		 </tr>
+	 <?php endforeach; ?>
+	 </table>
+	</div>
+ <?php endif; ?>
+ 
+ <?php if(isset($campaigns)) : ?>
+	<div>
+	 <h2>Liste des campagnes</h2>
+	 <table class="table">
+	 <tr>
+		 <th>id</th>
+		 <th>nom</th>
+		 <th>date de création</th>
+		 <th>créé par</th>
+		 <th>type de campagne</th>
+		 <th>&nbsp;</th>
+	 </tr>
+	 
+	 <?php foreach ($campaigns as $campagne) : ?>
+		 <tr>
+			 <td><?php echo $this->escapeHtml($campagne->id);?></td>
+			 <td><?php echo $this->escapeHtml($campagne->name);?></td>
+			 <td><?php echo $this->escapeHtml($campagne->create_date);?></td>
+			 <td><?php echo $this->escapeHtml($campagne->create_user);?></td>
+			 <td><?php echo $this->escapeHtml($campagne->type_campagne);?></td>
+			 <td><a href="workflow/campagne/<?php echo $this->escapeHtml($campagne->id);?>">détails</a></td>
+		 </tr>
+	 <?php endforeach; ?>
+	 </table>
+	</div>
+ <?php endif; ?>
